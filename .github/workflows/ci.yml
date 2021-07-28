@@ -54,9 +54,6 @@ jobs:
     - name: Test Ember
       run: yarn test:ember --launch ${{ matrix.browser }}
 
-    - name: Test Image Processing
-      run: yarn test:node
-
 
   floating-dependencies:
     name: Floating Dependencies
@@ -84,9 +81,6 @@ jobs:
 
     - name: Test
       run: yarn test:ember --launch ${{ matrix.browser }}
-
-    - name: Test Image Processing
-      run: yarn test:node
 
 
   try-scenarios:
