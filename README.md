@@ -1,7 +1,7 @@
-ember-configuration-ui
+@kaliber5/ember-configuration-ui
 ==============================================================================
 
-[Short description of the addon.]
+Reusable components for configurators and whatnot.
 
 
 Compatibility
@@ -9,14 +9,14 @@ Compatibility
 
 * Ember.js v3.20 or above
 * Ember CLI v3.20 or above
-* Node.js v10 or above
+* Node.js v12 or above
 
 
 Installation
 ------------------------------------------------------------------------------
 
 ```
-ember install ember-configuration-ui
+ember install @kaliber5/ember-configuration-ui
 ```
 
 
