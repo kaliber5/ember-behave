@@ -3,7 +3,7 @@
 ## Installation
 
 * `git clone <repository-url>`
-* `cd ember-configuration-ui`
+* `cd ember-behave`
 * `yarn install`
 
 ## Linting

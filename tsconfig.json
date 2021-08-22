@@ -28,16 +28,16 @@
         "tests/dummy/app/*",
         "app/*"
       ],
-      "@kaliber5/ember-configuration-ui": [
+      "ember-behave": [
         "addon"
       ],
-      "@kaliber5/ember-configuration-ui/*": [
+      "ember-behave/*": [
         "addon/*"
       ],
-      "@kaliber5/ember-configuration-ui/test-support": [
+      "ember-behave/test-support": [
         "addon-test-support"
       ],
-      "@kaliber5/ember-configuration-ui/test-support/*": [
+      "ember-behave/test-support/*": [
         "addon-test-support/*"
       ],
       "*": [

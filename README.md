@@ -1,4 +1,4 @@
-@kaliber5/ember-configuration-ui
+ember-behave
 ==============================================================================
 
 Reusable components for configurators and whatnot.
@@ -16,7 +16,7 @@ Installation
 ------------------------------------------------------------------------------
 
 ```
-ember install @kaliber5/ember-configuration-ui
+ember install ember-behave
 ```
 
 
