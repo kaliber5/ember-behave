@@ -1,13 +1,14 @@
 ember-behave
 ==============================================================================
 
-Reusable components for configurators and whatnot.
+Reusable behavioral (aka headless) components.
 
+> WORK IN PROGRESS!
 
 Compatibility
 ------------------------------------------------------------------------------
 
-* Ember.js v3.20 or above
+* Ember.js v3.28 or above
 * Ember CLI v3.20 or above
 * Node.js v12 or above
 
@@ -23,7 +24,7 @@ ember install ember-behave
 Usage
 ------------------------------------------------------------------------------
 
-[Longer description of how to use the addon in apps.]
+TODO
 
 
 Contributing
