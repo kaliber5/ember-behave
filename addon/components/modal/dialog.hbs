@@ -1,18 +1,26 @@
 {{#let (element (or @tagName "div")) as |Tag|}}
-  <Tag
-    role="dialog"
-    aria-modal="true"
-    tabindex="-1"
-    ...attributes
-    {{body-scroll-lock reserveScrollBarGap=true}}
-    {{focus-trap
-      shouldSelfFocus=true
-      focusTrapOptions=(hash
-        clickOutsideDeactivates=true
-      )
-    }}
-    {{on "keydown" (handle-keys @onClose 'Escape' stopPropagation=true)}}
-  >
-    {{yield}}
-  </Tag>
+  <AriaRelationship as |target reference|>
+    <Tag
+      role="dialog"
+      aria-modal="true"
+      tabindex="-1"
+      ...attributes
+      {{body-scroll-lock reserveScrollBarGap=true}}
+      {{focus-trap
+        shouldSelfFocus=true
+        focusTrapOptions=(hash
+          clickOutsideDeactivates=true
+        )
+      }}
+      {{on "keydown" (handle-keys @onClose 'Escape' stopPropagation=true)}}
+      {{target}}
+    >
+      {{yield
+        (hash
+          title=(modifier reference "labelledby")
+          description=(modifier reference "describedby")
+        )
+      }}
+    </Tag>
+  </AriaRelationship>
 {{/let}}
