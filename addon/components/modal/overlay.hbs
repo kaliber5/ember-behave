@@ -1,0 +1,9 @@
+{{#let (element (or @tagName "div")) as |Tag|}}
+  <Tag
+    {{on "click" @onClose}}
+    ...attributes
+  >
+    {{yield}}
+  </Tag>
+
+{{/let}}

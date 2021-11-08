@@ -1,0 +1,12 @@
+{{page-title "Dialog"}}
+
+<button type="button" {{on "click" (set this "open" true)}}>Open Dialog</button>
+
+<Modal @open={{this.open}} @onClose={{set this "open" false}} as |modal|>
+  <modal.Dialog class="modal-dialog">
+    <h2>Simple Dialog</h2>
+    <button type="button" {{on "click" modal.close}}>Close</button>
+    <button type="button" {{on "click" modal.close}}>Close2</button>
+  </modal.Dialog>
+  <modal.Overlay class="modal-overlay"/>
+</Modal>
