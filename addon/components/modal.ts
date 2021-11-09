@@ -2,7 +2,6 @@ import Component from '@glimmer/component';
 import { getDestinationElement } from 'ember-behave/utils/dom';
 
 interface ModalComponentArgs {
-  open?: boolean;
   onClose?: () => void;
   tagName?: string;
 }
