@@ -7,10 +7,12 @@
 
 import { getOwner } from '@ember/application';
 import { DEBUG } from '@glimmer/env';
+import { getOwnConfig } from '@embroider/macros';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import requirejs from 'require';
-import { warn } from '@ember/debug';
+import { assert } from '@ember/debug';
+import { EmbroiderOwnConfig } from 'ember-behave/types';
 
 declare global {
   const FastBoot: unknown;
@@ -75,34 +77,37 @@ export function getDOM(context: any): typeof document {
 
 export function getDestinationElement(context: unknown): HTMLElement | null {
   const dom = getDOM(context);
-  const id = 'ember-bootstrap-wormhole';
-  const destinationElement =
-    findElementById(dom, id) || findElemementByIdInShadowDom(context, id);
+  const id = getOwnConfig<EmbroiderOwnConfig>().portalTargetId;
+  let destinationElement = id
+    ? findElementById(dom, id) || findElemementByIdInShadowDom(context, id)
+    : null;
 
   if (DEBUG && !destinationElement) {
     const config = getOwner(context).resolveRegistration('config:environment');
     if (config.environment === 'test' && typeof FastBoot === 'undefined') {
-      let id;
       if (requirejs.has('@ember/test-helpers/dom/get-root-element')) {
         try {
-          id = requirejs('@ember/test-helpers/dom/get-root-element').default()
-            .id;
+          destinationElement = requirejs(
+            '@ember/test-helpers/dom/get-root-element'
+          ).default();
         } catch (ex) {
           // no op
         }
       }
-      if (!id) {
-        return document.querySelector('#ember-testing');
+      if (!destinationElement) {
+        destinationElement = document.querySelector('#ember-testing');
       }
-      return document.getElementById(id);
     }
-
-    warn(
-      `No portal destination element found for component ${context}.`,
-      false,
-      { id: 'ember-behave.no-destination-element' }
-    );
   }
+
+  if (!destinationElement) {
+    destinationElement = document.body;
+  }
+
+  assert(
+    `No portal target element found for component ${context}.`,
+    destinationElement
+  );
 
   return destinationElement;
 }
