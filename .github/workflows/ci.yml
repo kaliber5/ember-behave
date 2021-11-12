@@ -98,7 +98,8 @@ jobs:
           - ember-beta
           - ember-default-with-jquery
           - embroider-safe
-          - embroider-optimized
+#          @todo re-enable when https://github.com/embroider-build/embroider/issues/1018 has been resolved
+#          - embroider-optimized
         allow-failure: [false]
         include:
           - ember-try-scenario: ember-canary
