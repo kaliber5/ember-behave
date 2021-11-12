@@ -12,13 +12,14 @@
           clickOutsideDeactivates=true
         )
       }}
+      {{!-- template-lint-disable no-down-event-binding --}}
       {{on "keydown" (handle-keys @onClose 'Escape' stopPropagation=true)}}
       {{target}}
     >
       {{yield
         (hash
-          title=(modifier reference "labelledby")
-          description=(modifier reference "describedby")
+          title=(modifier reference "aria-labelledby")
+          description=(modifier reference "aria-describedby")
         )
       }}
     </Tag>
