@@ -93,13 +93,13 @@ jobs:
       fail-fast: false
       matrix:
         ember-try-scenario:
-          - ember-lts-3.20
-          - ember-lts-3.24
+          - ember-lts-3.28
           - ember-release
           - ember-beta
           - ember-default-with-jquery
           - embroider-safe
-          - embroider-optimized
+#          @todo re-enable when https://github.com/embroider-build/embroider/issues/1018 has been resolved
+#          - embroider-optimized
         allow-failure: [false]
         include:
           - ember-try-scenario: ember-canary

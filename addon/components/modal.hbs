@@ -1,0 +1,9 @@
+{{#in-element this.destinationElement insertBefore=null}}
+  {{yield
+    (hash
+      Dialog=(component "modal/dialog" onClose=@onClose)
+      Overlay=(component "modal/overlay" onClose=@onClose)
+      close=@onClose
+    )
+  }}
+{{/in-element}}
