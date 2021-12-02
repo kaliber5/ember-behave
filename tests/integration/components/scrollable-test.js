@@ -26,16 +26,24 @@ module('Integration | Component | scrollable', function (hooks) {
 
     assert
       .dom(
-        this.element.querySelector('.Behave-Scrollable .Behave-Scrollable-Content .MyScrollable-Content')
+        this.element.querySelector(
+          '.Behave-Scrollable .Behave-Scrollable-Content .MyScrollable-Content'
+        )
       )
       .exists();
 
     assert
-      .dom(this.element.querySelector('.Behave-Scrollable .Behave-Scrollable-Start .MyScrollable-Start'))
+      .dom(
+        this.element.querySelector(
+          '.Behave-Scrollable .Behave-Scrollable-Start .MyScrollable-Start'
+        )
+      )
       .exists();
 
     assert
-      .dom(this.element.querySelector('.Behave-Scrollable .Behave-Scrollable-End .MyScrollable-End'))
+      .dom(
+        this.element.querySelector('.Behave-Scrollable .Behave-Scrollable-End .MyScrollable-End')
+      )
       .exists();
   });
 
