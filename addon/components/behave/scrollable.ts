@@ -49,9 +49,7 @@ export default class EBScrollableComponent extends Component<EBScrollableArgs> {
 
   @action
   trackScroll(): void {
-    console.log('TrackScroll 1');
     if (!this.isEnabled || !this._element) return;
-    console.log('TrackScroll 2');
 
     const scrollSize =
       this.direction === 'vertical' ? this._element.scrollHeight : this._element.scrollWidth;
@@ -65,14 +63,6 @@ export default class EBScrollableComponent extends Component<EBScrollableArgs> {
     this.isScrollable = scrollSize > clientSize;
     this.isAtStart = scrollStart <= this.tolerance;
     this.isAtEnd = scrollStart >= scrollSize - clientSize - this.tolerance;
-
-    console.log({
-      scrollSize,
-      scrollStart,
-      clientSize,
-      atEnd: scrollSize - clientSize - this.tolerance,
-      tolerance: this.tolerance,
-    });
   }
 
   @action
