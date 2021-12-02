@@ -18,3 +18,85 @@
   background-color: rgba(0,0,0,0.5);
   z-index: 9;
 }
+
+.MyScrollable {
+  border: 1px solid black;
+}
+
+.MyScrollable.-vertical {
+  height: 200px;
+}
+
+.MyScrollable.-horizontal {
+  width: 400px;
+}
+
+.MyScrollable-Gradient {
+  position: absolute;
+
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.MyScrollable-Icon {
+  bottom: 10px;
+  left: 50%;
+  transform: translateY(-50%);
+
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.MyScrollable:not(.-end) .MyScrollable-Icon {
+  opacity: 1;
+}
+
+.MyScrollable-Gradient._top {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+
+  background: transparent;
+  background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+}
+
+.MyScrollable-Gradient._bottom {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+
+  background: transparent;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%);
+}
+
+.MyScrollable-Gradient._left {
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 100%;
+
+  background: transparent;
+  background: linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+}
+
+.MyScrollable-Gradient._right {
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 100%;
+
+  background: transparent;
+  background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%);
+}
+
+.MyScrollable.-enabled:not(.-start) .MyScrollable-Gradient._top,
+.MyScrollable.-enabled:not(.-start) .MyScrollable-Gradient._left {
+  opacity: 1;
+}
+
+.MyScrollable.-enabled:not(.-end) .MyScrollable-Gradient._right,
+.MyScrollable.-enabled:not(.-end) .MyScrollable-Gradient._bottom {
+  opacity: 1;
+}

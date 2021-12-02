@@ -1,0 +1,30 @@
+<div
+  class="
+    Behave-Scrollable
+    -{{this.direction}}
+    {{if this.isEnabled "-enabled"}}
+    {{if this.isAtStart "-start"}}
+    {{if this.isAtEnd "-end"}}
+  "
+
+  ...attributes
+>
+  <div class="Behave-Scrollable-Start {{this.startClass}}">
+    {{yield to="start"}}
+  </div>
+
+  <div class="Behave-Scrollable-End {{this.endClass}}">
+    {{yield to="end"}}
+  </div>
+
+  <div
+    class="Behave-Scrollable-Content {{this.contentClass}}"
+
+    {{(if this.isEnabled (modifier "element-query" sizes=false onResize=trackSize))}}
+
+    {{! ToDo: make conditional, remove condition from action https://github.com/emberjs/ember.js/issues/19869 }}
+    {{on "scroll" this.trackScroll}}
+  >
+    {{yield to="default"}}
+  </div>
+</div>

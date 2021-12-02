@@ -1,0 +1,26 @@
+.Behave-Scrollable {
+  position: relative;
+  overflow: hidden;
+}
+
+.Behave-Scrollable .Behave-Scrollable-Content {
+  height: 100%;
+  /* position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; */
+}
+
+.Behave-Scrollable.-vertical .Behave-Scrollable-Content {
+  overflow-y: auto;
+}
+
+.Behave-Scrollable.-horizontal .Behave-Scrollable-Content {
+  overflow-x: auto;
+}
+
+.Behave-Scrollable-Start > *, .Behave-Scrollable-End > * {
+  position: absolute;
+  pointer-events: none;
+}
