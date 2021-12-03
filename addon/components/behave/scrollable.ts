@@ -2,7 +2,6 @@ import { assert } from '@ember/debug';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { EQInfo } from 'ember-element-query';
 import { isNumber, isUndefined } from '@sniptt/guards';
 
 export type EbScrollableDirection = 'horizontal' | 'vertical';
@@ -14,8 +13,6 @@ export interface EBScrollableArgs {
 }
 
 export default class EBScrollableComponent extends Component<EBScrollableArgs> {
-  @tracked height?: number;
-  @tracked isScrollable = false;
   @tracked isAtStart = true;
   @tracked isAtEnd = false;
 
@@ -60,17 +57,18 @@ export default class EBScrollableComponent extends Component<EBScrollableArgs> {
     const clientSize =
       this.direction === 'vertical' ? this._element.clientHeight : this._element.clientWidth;
 
-    this.isScrollable = scrollSize > clientSize;
     this.isAtStart = scrollStart <= this.tolerance;
     this.isAtEnd = scrollStart >= scrollSize - clientSize - this.tolerance;
   }
 
   @action
-  trackSize(eqInfo: EQInfo): void {
+  trackSize(entry: ResizeObserverEntry): void {
     if (!this.isEnabled) return;
 
-    this.height = eqInfo.height;
-    this._element = eqInfo.element;
+    assert('Expected entry.target to be an HTMLElement', entry.target instanceof HTMLElement);
+
+    this._element = entry.target;
+
     this.trackScroll();
   }
 }

@@ -39,6 +39,7 @@
 }
 
 .MyScrollable-Icon {
+  position: absolute;
   bottom: 10px;
   left: 50%;
   transform: translateY(-50%);
@@ -47,7 +48,7 @@
   transition: opacity 0.5s;
 }
 
-.MyScrollable:not(.-end) .MyScrollable-Icon {
+.MyScrollable.-start .MyScrollable-Icon {
   opacity: 1;
 }
 

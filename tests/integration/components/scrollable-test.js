@@ -4,47 +4,38 @@ import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { settled } from '@ember/test-helpers';
 
+async function pause(durationMs = 10) {
+  await new Promise((resolve) => setTimeout(resolve, durationMs));
+  return settled();
+}
+
 module('Integration | Component | scrollable', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it yields all blocks', async function (assert) {
     await render(hbs`
-      <Behave::Scrollable>
-        <:default>
+      <Behave::Scrollable as |scrollable|>
+        <scrollable.content>
           <div class="MyScrollable-Content"></div>
-        </:default>
+        </scrollable.content>
 
-        <:start>
-          <div class="MyScrollable-Start"></div>
-        </:start>
+        <div class="MyScrollable-Start"></div>
 
-        <:end>
-          <div class="MyScrollable-End"></div>
-        </:end>
+        <div class="MyScrollable-End"></div>
       </Behave::Scrollable>
     `);
 
     assert
       .dom(
         this.element.querySelector(
-          '.Behave-Scrollable .Behave-Scrollable-Content .MyScrollable-Content'
+          '.Behave-Scrollable > .Behave-Scrollable-Content > .MyScrollable-Content'
         )
       )
       .exists();
 
-    assert
-      .dom(
-        this.element.querySelector(
-          '.Behave-Scrollable .Behave-Scrollable-Start .MyScrollable-Start'
-        )
-      )
-      .exists();
+    assert.dom(this.element.querySelector('.Behave-Scrollable > .MyScrollable-Start')).exists();
 
-    assert
-      .dom(
-        this.element.querySelector('.Behave-Scrollable .Behave-Scrollable-End .MyScrollable-End')
-      )
-      .exists();
+    assert.dom(this.element.querySelector('.Behave-Scrollable > .MyScrollable-End')).exists();
   });
 
   module('vertical', function () {
@@ -54,8 +45,11 @@ module('Integration | Component | scrollable', function (hooks) {
         <Behave::Scrollable
           class="MyScrollable"
           style="height: 100px;"
+          as |scrollable|
         >
-          <div style="height: 500px; width: 100px; background: deeppink;"></div>
+          <scrollable.content>
+            <div style="height: 500px; width: 100px; background: deeppink;"></div>
+          </scrollable.content>
         </Behave::Scrollable>
       `);
 
@@ -89,8 +83,11 @@ module('Integration | Component | scrollable', function (hooks) {
         <Behave::Scrollable
           class="MyScrollable"
           style="height: 200px;"
+          as |scrollable|
         >
-          <p>1</p>
+          <scrollable.content>
+            <p>1</p>
+          </scrollable.content>
         </Behave::Scrollable>
       `);
 
@@ -106,8 +103,11 @@ module('Integration | Component | scrollable', function (hooks) {
         <Behave::Scrollable
           class="MyScrollable"
           style="height: 100px;"
+          as |scrollable|
         >
-          <div style="height: 500px; width: 100px; background: deeppink;"></div>
+          <scrollable.content>
+            <div style="height: 500px; width: 100px; background: deeppink;"></div>
+          </scrollable.content>
         </Behave::Scrollable>
       `);
 
@@ -115,7 +115,7 @@ module('Integration | Component | scrollable', function (hooks) {
       const scrollableContent = this.element.querySelector('.Behave-Scrollable-Content');
 
       scrollableContent.scrollTo(0, 50);
-      await settled();
+      await pause();
 
       assert.dom(scrollable).doesNotHaveClass('-end');
       assert.dom(scrollable).doesNotHaveClass('-start');
@@ -127,8 +127,11 @@ module('Integration | Component | scrollable', function (hooks) {
         <Behave::Scrollable
           class="MyScrollable"
           style="height: 100px;"
+          as |scrollable|
         >
-          <div style="height: 500px; width: 100px; background: deeppink;"></div>
+          <scrollable.content>
+            <div style="height: 500px; width: 100px; background: deeppink;"></div>
+          </scrollable.content>
         </Behave::Scrollable>
       `);
 
@@ -136,7 +139,7 @@ module('Integration | Component | scrollable', function (hooks) {
       const scrollableContent = this.element.querySelector('.Behave-Scrollable-Content');
 
       scrollableContent.scrollTo(0, 11);
-      await settled();
+      await pause();
 
       assert.dom(scrollable).doesNotHaveClass('-end');
       assert.dom(scrollable).doesNotHaveClass('-start');
@@ -149,8 +152,11 @@ module('Integration | Component | scrollable', function (hooks) {
           @tolerance={{100}}
           class="MyScrollable"
           style="height: 100px;"
+          as |scrollable|
         >
-          <div style="height: 500px; width: 100px; background: deeppink;"></div>
+          <scrollable.content>
+            <div style="height: 500px; width: 100px; background: deeppink;"></div>
+          </scrollable.content>
         </Behave::Scrollable>
       `);
 
@@ -158,7 +164,7 @@ module('Integration | Component | scrollable', function (hooks) {
       const scrollableContent = this.element.querySelector('.Behave-Scrollable-Content');
 
       scrollableContent.scrollTo(0, 101);
-      await settled();
+      await pause();
 
       assert.dom(scrollable).doesNotHaveClass('-end');
       assert.dom(scrollable).doesNotHaveClass('-start');
@@ -170,8 +176,11 @@ module('Integration | Component | scrollable', function (hooks) {
         <Behave::Scrollable
           class="MyScrollable"
           style="height: 100px;"
+          as |scrollable|
         >
-          <div style="height: 500px; width: 100px; background: deeppink;"></div>
+          <scrollable.content>
+            <div style="height: 500px; width: 100px; background: deeppink;"></div>
+          </scrollable.content>
         </Behave::Scrollable>
       `);
 
@@ -179,7 +188,7 @@ module('Integration | Component | scrollable', function (hooks) {
       const scrollableContent = this.element.querySelector('.Behave-Scrollable-Content');
 
       scrollableContent.scrollTo(0, 5000);
-      await settled();
+      await pause();
 
       assert.dom(scrollable).hasClass('-enabled');
       assert.dom(scrollable).hasClass('-vertical');
@@ -196,8 +205,11 @@ module('Integration | Component | scrollable', function (hooks) {
           class="MyScrollable"
           @direction="horizontal"
           style="width: 100px;"
+          as |scrollable|
         >
-          <div style="width: 500px; height: 50px; background-color: deeppink;"></div>
+          <scrollable.content>
+            <div style="width: 500px; height: 50px; background-color: deeppink;"></div>
+          </scrollable.content>
         </Behave::Scrollable>
       `);
 
@@ -233,8 +245,11 @@ module('Integration | Component | scrollable', function (hooks) {
           @direction="horizontal"
           class="MyScrollable"
           style="height: 200px;"
+          as |scrollable|
         >
-          <p>1</p>
+          <scrollable.content>
+            <p>1</p>
+          </scrollable.content>
         </Behave::Scrollable>
       `);
 
@@ -251,8 +266,11 @@ module('Integration | Component | scrollable', function (hooks) {
           @direction="horizontal"
           class="MyScrollable"
           style="height: 100px;"
+          as |scrollable|
         >
-          <div style="width: 500px; height: 50px; background-color: deeppink;"></div>
+          <scrollable.content>
+            <div style="width: 500px; height: 50px; background-color: deeppink;"></div>
+          </scrollable.content>
         </Behave::Scrollable>
       `);
 
@@ -260,7 +278,7 @@ module('Integration | Component | scrollable', function (hooks) {
       const scrollableContent = this.element.querySelector('.Behave-Scrollable-Content');
 
       scrollableContent.scrollTo(50, 0);
-      await settled();
+      await pause();
 
       assert.dom(scrollable).doesNotHaveClass('-end');
       assert.dom(scrollable).doesNotHaveClass('-start');
@@ -274,8 +292,11 @@ module('Integration | Component | scrollable', function (hooks) {
           @tolerance={{70}}
           class="MyScrollable"
           style="height: 100px; width: 100px;"
+          as |scrollable|
         >
-          <div style="width: 500px; height: 50px; background-color: deeppink;"></div>
+          <scrollable.content>
+            <div style="width: 500px; height: 50px; background-color: deeppink;"></div>
+          </scrollable.content>
         </Behave::Scrollable>
       `);
 
@@ -283,7 +304,7 @@ module('Integration | Component | scrollable', function (hooks) {
       const scrollableContent = this.element.querySelector('.Behave-Scrollable-Content');
 
       scrollableContent.scrollTo(100, 0);
-      await settled();
+      await pause();
 
       assert.dom(scrollable).doesNotHaveClass('-end');
       assert.dom(scrollable).doesNotHaveClass('-start');
@@ -296,8 +317,11 @@ module('Integration | Component | scrollable', function (hooks) {
           @direction="horizontal"
           class="MyScrollable"
           style="height: 100px;"
+          as |scrollable|
         >
-          <div style="width: 500px; height: 50px; background-color: deeppink;"></div>
+          <scrollable.content>
+            <div style="width: 500px; height: 50px; background-color: deeppink;"></div>
+          </scrollable.content>
         </Behave::Scrollable>
       `);
 
@@ -305,7 +329,7 @@ module('Integration | Component | scrollable', function (hooks) {
       const scrollableContent = this.element.querySelector('.Behave-Scrollable-Content');
 
       scrollableContent.scrollTo(5, 0);
-      await settled();
+      await pause();
 
       assert.dom(scrollable).doesNotHaveClass('-end');
       assert.dom(scrollable).hasClass('-start');
@@ -319,8 +343,11 @@ module('Integration | Component | scrollable', function (hooks) {
           @tolerance={{100}}
           class="MyScrollable"
           style="height: 100px; width: 100px;"
+          as |scrollable|
         >
-          <div style="width: 500px; height: 50px; background-color: deeppink;"></div>
+          <scrollable.content>
+            <div style="width: 500px; height: 50px; background-color: deeppink;"></div>
+          </scrollable.content>
         </Behave::Scrollable>
       `);
 
@@ -328,7 +355,7 @@ module('Integration | Component | scrollable', function (hooks) {
       const scrollableContent = this.element.querySelector('.Behave-Scrollable-Content');
 
       scrollableContent.scrollTo(50, 0);
-      await settled();
+      await pause();
 
       assert.dom(scrollable).doesNotHaveClass('-end');
       assert.dom(scrollable).hasClass('-start');
@@ -341,8 +368,11 @@ module('Integration | Component | scrollable', function (hooks) {
           @direction="horizontal"
           class="MyScrollable"
           style="height: 100px;"
+          as |scrollable|
         >
-          <div style="width: 500px; height: 50px; background-color: deeppink;"></div>
+          <scrollable.content>
+            <div style="width: 500px; height: 50px; background-color: deeppink;"></div>
+          </scrollable.content>
         </Behave::Scrollable>
       `);
 
@@ -350,7 +380,7 @@ module('Integration | Component | scrollable', function (hooks) {
       const scrollableContent = this.element.querySelector('.Behave-Scrollable-Content');
 
       scrollableContent.scrollTo(5000, 0);
-      await settled();
+      await pause();
 
       assert.dom(scrollable).hasClass('-end');
       assert.dom(scrollable).doesNotHaveClass('-start');
@@ -364,8 +394,11 @@ module('Integration | Component | scrollable', function (hooks) {
           @tolerance={{70}}
           class="MyScrollable"
           style="height: 100px; width: 100px;"
+          as |scrollable|
         >
-          <div style="width: 500px; height: 50px; background-color: deeppink;"></div>
+          <scrollable.content>
+            <div style="width: 500px; height: 50px; background-color: deeppink;"></div>
+          </scrollable.content>
         </Behave::Scrollable>
       `);
 
@@ -373,7 +406,7 @@ module('Integration | Component | scrollable', function (hooks) {
       const scrollableContent = this.element.querySelector('.Behave-Scrollable-Content');
 
       scrollableContent.scrollTo(350, 0);
-      await settled();
+      await pause();
 
       assert.dom(scrollable).hasClass('-end');
       assert.dom(scrollable).doesNotHaveClass('-start');
@@ -386,8 +419,11 @@ module('Integration | Component | scrollable', function (hooks) {
           @direction="horizontal"
           class="MyScrollable"
           style="height: 100px; width: 100px;"
+          as |scrollable|
         >
-          <div style="width: 500px; height: 50px; background-color: deeppink;"></div>
+          <scrollable.content>
+            <div style="width: 500px; height: 50px; background-color: deeppink;"></div>
+          </scrollable.content>
         </Behave::Scrollable>
       `);
 
@@ -395,7 +431,7 @@ module('Integration | Component | scrollable', function (hooks) {
       const scrollableContent = this.element.querySelector('.Behave-Scrollable-Content');
 
       scrollableContent.scrollTo(350, 0);
-      await settled();
+      await pause();
 
       assert.dom(scrollable).doesNotHaveClass('-end');
       assert.dom(scrollable).doesNotHaveClass('-start');
@@ -408,8 +444,11 @@ module('Integration | Component | scrollable', function (hooks) {
           @direction="horizontal"
           class="MyScrollable"
           style="height: 100px; width: 100px;"
+          as |scrollable|
         >
-          <div style="width: 500px; height: 50px; background-color: deeppink;"></div>
+          <scrollable.content>
+            <div style="width: 500px; height: 50px; background-color: deeppink;"></div>
+          </scrollable.content>
         </Behave::Scrollable>
       `);
 
@@ -417,7 +456,7 @@ module('Integration | Component | scrollable', function (hooks) {
       const scrollableContent = this.element.querySelector('.Behave-Scrollable-Content');
 
       scrollableContent.scrollTo(395, 0);
-      await settled();
+      await pause();
 
       assert.dom(scrollable).hasClass('-end');
       assert.dom(scrollable).doesNotHaveClass('-start');
