@@ -24,6 +24,7 @@ module('Integration | Component | scrollable', function (hooks) {
         <div class="MyScrollable-End"></div>
       </Behave::Scrollable>
     `);
+    await pause();
 
     assert
       .dom(
@@ -52,6 +53,7 @@ module('Integration | Component | scrollable', function (hooks) {
           </scrollable.content>
         </Behave::Scrollable>
       `);
+      await pause();
 
       const scrollable = this.element.querySelector('.MyScrollable');
 
@@ -71,6 +73,7 @@ module('Integration | Component | scrollable', function (hooks) {
         >
         </Behave::Scrollable>
       `);
+      await pause();
 
       const scrollable = this.element.querySelector('.MyScrollable');
 
@@ -90,6 +93,7 @@ module('Integration | Component | scrollable', function (hooks) {
           </scrollable.content>
         </Behave::Scrollable>
       `);
+      await pause();
 
       const scrollable = this.element.querySelector('.MyScrollable');
 
@@ -110,6 +114,7 @@ module('Integration | Component | scrollable', function (hooks) {
           </scrollable.content>
         </Behave::Scrollable>
       `);
+      await pause();
 
       const scrollable = this.element.querySelector('.MyScrollable');
       const scrollableContent = this.element.querySelector('.Behave-Scrollable-Content');
@@ -252,6 +257,7 @@ module('Integration | Component | scrollable', function (hooks) {
           </scrollable.content>
         </Behave::Scrollable>
       `);
+      await pause();
 
       const scrollable = this.element.querySelector('.MyScrollable');
 
