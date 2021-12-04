@@ -4,7 +4,7 @@ import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { settled } from '@ember/test-helpers';
 
-async function pause(durationMs = 10) {
+async function pause(durationMs = 100) {
   await new Promise((resolve) => setTimeout(resolve, durationMs));
   return settled();
 }
