@@ -2,14 +2,13 @@ import { assert } from '@ember/debug';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { isNumber, isUndefined } from '@sniptt/guards';
 
 export type EbScrollableDirection = 'horizontal' | 'vertical';
 
 export interface EBScrollableArgs {
-  isEnabled?: boolean | unknown;
-  direction?: EbScrollableDirection | unknown; // default 'vertical'
-  tolerance?: number | unknown; // default 10
+  isEnabled?: boolean | null | unknown;
+  direction?: EbScrollableDirection | null | unknown; // default 'vertical'
+  tolerance?: number | null | unknown; // default 10
 }
 
 export default class EBScrollableComponent extends Component<EBScrollableArgs> {
@@ -26,7 +25,8 @@ export default class EBScrollableComponent extends Component<EBScrollableArgs> {
   get direction(): EbScrollableDirection {
     assert(
       '@direction must be `"horizontal"`, `"vertical"` or `undefined',
-      isUndefined(this.args.direction) ||
+      this.args.direction === undefined ||
+        this.args.direction === null ||
         this.args.direction === 'horizontal' ||
         this.args.direction === 'vertical'
     );
@@ -37,8 +37,9 @@ export default class EBScrollableComponent extends Component<EBScrollableArgs> {
   get tolerance(): number {
     assert(
       '@tolerance must be a positive number of `undefined`',
-      isUndefined(this.args.tolerance) ||
-        (isNumber(this.args.tolerance) && this.args.tolerance >= 0)
+      this.args.tolerance === undefined ||
+        this.args.tolerance === null ||
+        (typeof this.args.tolerance === 'number' && this.args.tolerance >= 0)
     );
 
     return this.args.tolerance ?? 10;

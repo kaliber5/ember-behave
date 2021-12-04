@@ -33,7 +33,6 @@
   },
   "dependencies": {
     "@embroider/macros": "^0.47.1",
-    "@sniptt/guards": "^0.2.0",
     "ember-auto-import": "^2.2.3",
     "ember-body-scroll-lock": "^0.3.0",
     "ember-cli-babel": "^7.26.6",
