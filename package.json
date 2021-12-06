@@ -39,7 +39,7 @@
     "ember-cli-htmlbars": "^5.7.1",
     "ember-cli-typescript": "^4.2.1",
     "ember-element-helper": "^0.5.5",
-    "ember-focus-trap": "^0.7.0",
+    "ember-focus-trap": "^0.8.0",
     "ember-handle-keys-helper": "^1.0.0",
     "ember-modifier": "^3.0.0",
     "ember-on-resize-modifier": "^1.0.0-alpha.0",
