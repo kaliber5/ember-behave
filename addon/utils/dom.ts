@@ -28,10 +28,7 @@ function childNodesOfElement(element: HTMLElement): HTMLElement[] {
   return children;
 }
 
-export function findElementById(
-  doc: typeof document,
-  id: string
-): HTMLElement | null {
+export function findElementById(doc: typeof document, id: string): HTMLElement | null {
   if (doc.getElementById) {
     return doc.getElementById(id);
   }
@@ -87,9 +84,7 @@ export function getDestinationElement(context: unknown): HTMLElement | null {
     if (config.environment === 'test' && typeof FastBoot === 'undefined') {
       if (requirejs.has('@ember/test-helpers/dom/get-root-element')) {
         try {
-          destinationElement = requirejs(
-            '@ember/test-helpers/dom/get-root-element'
-          ).default();
+          destinationElement = requirejs('@ember/test-helpers/dom/get-root-element').default();
         } catch (ex) {
           // no op
         }
@@ -104,21 +99,12 @@ export function getDestinationElement(context: unknown): HTMLElement | null {
     destinationElement = document.body;
   }
 
-  assert(
-    `No portal target element found for component ${context}.`,
-    destinationElement
-  );
+  assert(`No portal target element found for component ${context}.`, destinationElement);
 
   return destinationElement;
 }
 
-export function findElemementByIdInShadowDom(
-  context: unknown,
-  id: string
-): HTMLElement | null {
+export function findElemementByIdInShadowDom(context: unknown, id: string): HTMLElement | null {
   const owner = getOwner(context);
-  return (
-    owner.rootElement.querySelector &&
-    owner.rootElement.querySelector(`[id="${id}"]`)
-  );
+  return owner.rootElement.querySelector && owner.rootElement.querySelector(`[id="${id}"]`);
 }

@@ -1,0 +1,9 @@
+<div
+  class="Behave-Scrollable-Content"
+  {{(if @isEnabled (modifier "on-resize" @trackSize))}}
+  {{on "scroll" @trackScroll passive=true}}
+  ...attributes
+>
+  {{yield}}
+</div>
+

@@ -1,12 +1,6 @@
 import { module, skip, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import {
-  click,
-  focus,
-  render,
-  settled,
-  triggerKeyEvent,
-} from '@ember/test-helpers';
+import { click, focus, render, settled, triggerKeyEvent } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import sinon from 'sinon';
 
@@ -19,11 +13,11 @@ module('Integration | Component | modal', function (hooks) {
   module('Dialog', function () {
     test('it renders block content', async function (assert) {
       await render(hbs`
-        <Modal @onClose={{this.onClose}} as |modal|>
+        <Behave::Modal @onClose={{this.onClose}} as |modal|>
           <modal.Dialog data-test-dialog>
             <button type="button">Hello world!</button>
           </modal.Dialog>
-        </Modal>
+        </Behave::Modal>
       `);
 
       assert
@@ -33,11 +27,11 @@ module('Integration | Component | modal', function (hooks) {
 
     test('it has a11y attributes', async function (assert) {
       await render(hbs`
-        <Modal @onClose={{this.onClose}} as |modal|>
+        <Behave::Modal @onClose={{this.onClose}} as |modal|>
           <modal.Dialog data-test-dialog>
             <button type="button">Hello world!</button>
           </modal.Dialog>
-        </Modal>
+        </Behave::Modal>
       `);
 
       assert
@@ -48,11 +42,11 @@ module('Integration | Component | modal', function (hooks) {
 
     test('it is initially focused', async function (assert) {
       await render(hbs`
-        <Modal @onClose={{this.onClose}} as |modal|>
+        <Behave::Modal @onClose={{this.onClose}} as |modal|>
           <modal.Dialog data-test-dialog>
             <button type="button">Hello world!</button>
           </modal.Dialog>
-        </Modal>
+        </Behave::Modal>
       `);
 
       // eslint-disable-next-line ember/no-settled-after-test-helper
@@ -67,11 +61,11 @@ module('Integration | Component | modal', function (hooks) {
       await render(hbs`
         <button type="button" data-test-button>Open</button>
         {{#if this.open}}
-          <Modal @onClose={{this.onClose}} as |modal|>
+          <Behave::Modal @onClose={{this.onClose}} as |modal|>
             <modal.Dialog data-test-dialog>
               <button type="button">Hello world!</button>
             </modal.Dialog>
-          </Modal>
+          </Behave::Modal>
         {{/if}}
       `);
 
@@ -90,11 +84,11 @@ module('Integration | Component | modal', function (hooks) {
 
     test('Pressing escape key will will call onClose action', async function (assert) {
       await render(hbs`
-        <Modal @onClose={{this.onClose}} as |modal|>
+        <Behave::Modal @onClose={{this.onClose}} as |modal|>
           <modal.Dialog data-test-dialog>
             <button type="button">Hello world!</button>
           </modal.Dialog>
-        </Modal>
+        </Behave::Modal>
       `);
 
       await triggerKeyEvent('[data-test-dialog]', 'keydown', 27);
@@ -104,12 +98,12 @@ module('Integration | Component | modal', function (hooks) {
 
     test('it yields modifier for aria-labelledby', async function (assert) {
       await render(hbs`
-        <Modal @onClose={{this.onClose}} as |modal|>
+        <Behave::Modal @onClose={{this.onClose}} as |modal|>
           <modal.Dialog data-test-dialog as |dialog|>
             <h2 data-test-title {{dialog.title}}>Title</h2>
             <button type="button">Hello world!</button>
           </modal.Dialog>
-        </Modal>
+        </Behave::Modal>
       `);
 
       const id = this.element.querySelector('[data-test-title]').id;
@@ -119,12 +113,12 @@ module('Integration | Component | modal', function (hooks) {
 
     test('it yields modifier for aria-describedby', async function (assert) {
       await render(hbs`
-        <Modal @onClose={{this.onClose}} as |modal|>
+        <Behave::Modal @onClose={{this.onClose}} as |modal|>
           <modal.Dialog data-test-dialog as |dialog|>
             <p data-test-description {{dialog.description}}>bla bla</p>
             <button type="button">Hello world!</button>
           </modal.Dialog>
-        </Modal>
+        </Behave::Modal>
       `);
 
       const id = this.element.querySelector('[data-test-description]').id;
@@ -140,12 +134,12 @@ module('Integration | Component | modal', function (hooks) {
   module('Overlay', function () {
     test('clicking on on overlay calls onClose action', async function (assert) {
       await render(hbs`
-      <Modal @onClose={{this.onClose}} as |modal|>
+      <Behave::Modal @onClose={{this.onClose}} as |modal|>
         <modal.Dialog data-test-dialog>
           <button type="button" {{on "click" modal.close}}>Hello world!</button>
         </modal.Dialog>
         <modal.Overlay data-test-overlay/>
-      </Modal>
+      </Behave::Modal>
     `);
 
       await click('[data-test-overlay]');
@@ -155,11 +149,11 @@ module('Integration | Component | modal', function (hooks) {
 
   test('it yields a close action', async function (assert) {
     await render(hbs`
-      <Modal @onClose={{this.onClose}} as |modal|>
+      <Behave::Modal @onClose={{this.onClose}} as |modal|>
         <modal.Dialog data-test-dialog>
           <button type="button" {{on "click" modal.close}}>Hello world!</button>
         </modal.Dialog>
-      </Modal>
+      </Behave::Modal>
     `);
 
     await click('button');
@@ -168,11 +162,11 @@ module('Integration | Component | modal', function (hooks) {
 
   test('Renders w/ in-element', async function (assert) {
     await render(hbs`
-      <Modal @onClose={{this.onClose}} as |modal|>
+      <Behave::Modal @onClose={{this.onClose}} as |modal|>
         <modal.Dialog data-test-dialog>
           <button type="button">Hello world!</button>
         </modal.Dialog>
-      </Modal>
+      </Behave::Modal>
     `);
 
     assert.dom('[data-test-dialog]').exists({ count: 1 }, 'Modal exists.');
@@ -183,12 +177,12 @@ module('Integration | Component | modal', function (hooks) {
     this.set('show', false);
     await render(hbs`
       {{#if this.show}}
-        <Modal @onClose={{this.onClose}} as |modal|>
+        <Behave::Modal @onClose={{this.onClose}} as |modal|>
           <modal.Dialog data-test-dialog>
             <button type="button" {{on "click" modal.close}}>Hello world!</button>
           </modal.Dialog>
           <modal.Overlay data-test-overlay/>
-        </Modal>
+        </Behave::Modal>
       {{/if}}
       <div style="height: 2000px"></div>
     `);

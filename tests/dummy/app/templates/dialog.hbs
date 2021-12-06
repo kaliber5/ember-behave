@@ -3,12 +3,12 @@
 <button type="button" {{on "click" (set this "open" true)}}>Open Dialog</button>
 
 {{#if this.open}}
-  <Modal @onClose={{set this "open" false}} as |modal|>
+  <Behave::Modal @onClose={{set this "open" false}} as |modal|>
     <modal.Dialog class="modal-dialog" as |dialog|>
       <h2 {{dialog.title}}>Simple Dialog</h2>
       <button type="button" {{on "click" modal.close}}>Close</button>
       <button type="button" {{on "click" modal.close}}>Close2</button>
     </modal.Dialog>
     <modal.Overlay class="modal-overlay"/>
-  </Modal>
+  </Behave::Modal>
 {{/if}}

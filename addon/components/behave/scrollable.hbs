@@ -1,0 +1,21 @@
+<div
+  class="
+    Behave-Scrollable
+    -{{this.direction}}
+    {{if this.isEnabled "-enabled"}}
+    {{if this.isAtStart "-start"}}
+    {{if this.isAtEnd "-end"}}
+  "
+
+  ...attributes
+>
+  {{yield (hash
+    content=(component 'behave/scrollable/content'
+      isEnabled=this.isEnabled
+      trackScroll=this.trackScroll
+      trackSize=this.trackSize
+    )
+    isAtStart=this.isAtStart
+    isAtEnd=this.isAtEnd
+  )}}
+</div>
