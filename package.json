@@ -137,8 +137,5 @@
       "release": true,
       "tokenRef": "GITHUB_AUTH"
     }
-  },
-  "resolutions": {
-    "**/ember-modifier": "^3.0.0"
   }
 }
